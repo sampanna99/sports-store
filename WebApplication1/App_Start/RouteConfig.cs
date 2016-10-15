@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-
 namespace WebApplication1
 {
     public class RouteConfig
@@ -8,6 +7,22 @@ namespace WebApplication1
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+            routes.MapRoute(null, "", new { Controller = "Product", action = "List", category = (string)null, page = 1 });
+
+            routes.MapRoute(null, "Page{page}", new { Controller = "Product", action = "List", category = (string)null }, new { page = @"\d+" });
+
+            routes.MapRoute(null, "{category}", new { Controller = "Product", action = "List", page = 1 });
+
+            routes.MapRoute(null, "{category}/Page{page}", new { Controller = "Product", action = "List" }, new { page = @"\d+" });
+
+
+            //routes.MapRoute(
+            //    name: null,
+            //    url: "Page{page}",
+            //    defaults: new { Controller = "Product", action = "List" }
+            //    );
 
             routes.MapRoute(
                 name: "Default",

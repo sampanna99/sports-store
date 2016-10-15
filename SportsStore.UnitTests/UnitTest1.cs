@@ -2,9 +2,9 @@
 using Moq;
 using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
-using System.Collections.Generic;
 using System.Linq;
 using WebApplication1.Controllers;
+using WebApplication1.Models;
 
 namespace SportsStore.UnitTests
 {
@@ -28,14 +28,27 @@ namespace SportsStore.UnitTests
             ProductController controller = new ProductController(mock.Object);
             controller.PageSize = 3;
             //act
-            IEnumerable<Product> result = (IEnumerable<Product>)controller.List(2).Model;
+            //IEnumerable<Product> result = (IEnumerable<Product>)controller.List(2).Model;
+            //after adding the viewmodel
+
+            ProductListViewModel result = (ProductListViewModel)controller.List(null, 2).Model;
+
 
             //assert
-            Product[] prodArray = result.ToArray();
+            Product[] prodArray = result.Products.ToArray(); //I changed here some after adding the view model
             Assert.IsTrue(prodArray.Length == 2);
             Assert.AreEqual(prodArray[0].Name, "P4");
             Assert.AreEqual(prodArray[1].Name, "P5");
 
         }
     }
+
+    //[TestMethod]
+    //public void Can_Generate_Page_Links()
+    //{
+
+    //}
+
+    //[TestMethod]
+
 }
