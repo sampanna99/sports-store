@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using SportsStore.Domain.Entities;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebApplication1.Infrastructure.Binders;
 
 namespace WebApplication1
 {
@@ -13,6 +11,8 @@ namespace WebApplication1
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
